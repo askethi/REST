@@ -117,7 +117,7 @@
                             <input type="text" name="id"
                                    class="form-control" id="idEdit"
                                    th:value="${userIter.getId()}"
-                                   readonly/>
+                                   disabled/>
                           </div>
 
                           <div class="mb-3">
@@ -201,31 +201,31 @@
                             <label for="idDelete" class="col-form-label"><b>ID</b></label>
                             <input type="text" name="id"
                                    class="form-control" id="idDelete"
-                                   th:value="${userIter.getId()}" readonly/>
+                                   th:value="${userIter.getId()}" disabled/>
                           </div>
                           <div class="mb-3">
                             <label for="firstNameDelete" class="col-form-label"><b>First Name</b></label>
                             <input type="text" name="firstname"
                                    class="form-control" id="firstNameDelete"
-                                   th:value="${userIter.getFirstName()}" readonly/>
+                                   th:value="${userIter.getFirstName()}" disabled/>
                           </div>
                           <div class="mb-3">
                             <label for="lastNameDelete" class="col-form-label"><b>Last Name</b></label>
                             <input type="text" name="lastname"
                                    class="form-control" id="lastNameDelete"
-                                   th:value="${userIter.getLastName()}" readonly/>
+                                   th:value="${userIter.getLastName()}" disabled/>
                           </div>
                           <div class="mb-3">
                             <label for="ageDelete" class="col-form-label"><b>Age</b></label>
                             <input type="number" name="age"
                                    class="form-control" id="ageDelete"
-                                   th:value="${userIter.getAge()}" readonly/>
+                                   th:value="${userIter.getAge()}" disabled/>
                           </div>
                           <div class="mb-3">
                             <label for="emailDelete" class="col-form-label"><b>Email</b></label>
                             <input type="text" name="Surname"
                                    class="form-control" id="emailDelete"
-                                   th:value="${userIter.getEmail()}" readonly/>
+                                   th:value="${userIter.getEmail()}" disabled/>
                           </div>
                           <label for="deleteRoles"><b>Role</b></label>
                           <select multiple class="form-control"

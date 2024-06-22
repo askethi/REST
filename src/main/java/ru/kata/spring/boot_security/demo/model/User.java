@@ -53,13 +53,13 @@ public class User implements UserDetails {
 
    public User() {}
 
-   public User(int id, String firstName, String lastName, String email, int age, String username, String password, Set<Role> roles) {
+   public User(int id, String firstName, String lastName, String email, int age, String password, Set<Role> roles) {
       this.id = id;
       this.firstName = firstName;
       this.lastName = lastName;
       this.email = email;
       this.age = age;
-      this.username = username;
+      this.username = email;
       this.password = password;
       this.roles = roles;
    }
@@ -102,6 +102,7 @@ public class User implements UserDetails {
 
    public void setEmail(String email) {
       this.email = email;
+      this.username = email;
    }
 
    public int getAge() {
@@ -142,7 +143,7 @@ public class User implements UserDetails {
 
    @Override
    public String getUsername() {
-      return this.username;
+      return this.email;
    }
 
    @Override
