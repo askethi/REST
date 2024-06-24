@@ -31,7 +31,7 @@ public class User implements UserDetails {
    @Column(name = "age")
    private int age;
 
-   @Column(name = "user_name")
+   @Column(name = "user_name", unique = true)
    private String username;
 
    @Column(name = "password")
@@ -65,12 +65,12 @@ public class User implements UserDetails {
    }
 
    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+      this.roles = roles;
+   }
 
-    public Set<Role> getRoles() {
-        return this.roles;
-    }
+   public Set<Role> getRoles() {
+      return this.roles;
+   }
 
    public int getId() {
       return id;
