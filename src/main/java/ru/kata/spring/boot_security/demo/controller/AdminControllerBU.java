@@ -1,35 +1,32 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import java.security.Principal;
+import java.util.List;
 
-@Controller
-@RequestMapping("/admin")
-public class AdminController {
+//@RestController
+@RequestMapping("/api")
+public class AdminControllerBU {
 
     final UserService userService;
     final RoleService roleService;
 
     @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
+    public AdminControllerBU(UserService userService, RoleService roleService) {
         this.userService = userService;
         this.roleService = roleService;
     }
 
-    @GetMapping()
-    public String index(Model model, Principal principal) {
-        model.addAttribute("user", userService.findByUsername(principal.getName()));
-        model.addAttribute("users", userService.listUsers());
-        model.addAttribute("activeTab", "usersTable");
-        model.addAttribute("roles", roleService.listRoles());
-        return "users/admin";
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> index() {
+        return new ResponseEntity<>(userService.listUsers(), HttpStatus.OK);
     }
 
     @GetMapping("/new")
@@ -58,10 +55,9 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/show")
-    public String show(@RequestParam("id") int id, Model model) {
-        model.addAttribute("user", userService.getUserById(id));
-        return "user";
+    @GetMapping("/user")
+    public User user(@RequestParam("id") int id) {
+        return userService.getUserById(id);
     }
 
     @PostMapping("/delete")
