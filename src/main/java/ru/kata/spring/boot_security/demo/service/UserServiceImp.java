@@ -10,6 +10,7 @@ import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -18,11 +19,13 @@ public class UserServiceImp implements UserService{
 
    private final UserRepository userRepository;
    private final PasswordEncoder passwordEncoder;
+   private final RoleService roleService;
 
    @Autowired
-   UserServiceImp(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+   UserServiceImp(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
       this.userRepository = userRepository;
       this.passwordEncoder = passwordEncoder;
+      this.roleService = roleService;
    }
 
    @Transactional
@@ -45,6 +48,9 @@ public class UserServiceImp implements UserService{
    @Transactional
    @Override
    public void updateUser(User user) {
+      user.setRoles(user.getRoles().stream()
+              .map(role -> roleService.findByRole(role.getRole()))
+              .collect(Collectors.toSet()));
       user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
    }

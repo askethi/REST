@@ -146,6 +146,10 @@ public class User implements UserDetails {
       return this.email;
    }
 
+   public void setUsername() {
+      this.username = this.email;
+   }
+
    @Override
    public boolean isAccountNonExpired() {
       return true;
