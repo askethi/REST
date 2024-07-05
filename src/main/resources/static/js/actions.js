@@ -1,6 +1,3 @@
-const rolesSelected = document.getElementById("roles");
-
-
 
 function getRoles(rolesSelected) {
     let roles = [];
