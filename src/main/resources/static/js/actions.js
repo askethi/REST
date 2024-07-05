@@ -37,8 +37,7 @@ modalDelete.addEventListener("submit", async function(event) {
         const userId = event.target.querySelector("#idDelete").value;
         await deleteUser(userId);
         await fillAllUsers();
-        const modalBootstrap = bootstrap.Modal.getInstance(modalDelete);
-        modalBootstrap.hide();
+        bootstrap.Modal.getInstance(modalDelete).hide();
     }
 )
 
@@ -56,8 +55,7 @@ modalEdit.addEventListener("submit", async function(event){
     }
     await sendDataEditUser(user);
     await fillAllUsers();
-    const modalBootstrap = bootstrap.Modal.getInstance(modalEdit);
-    modalBootstrap.hide();
+    bootstrap.Modal.getInstance(modalEdit).hide();
 })
 
 async function newUserForm() {
