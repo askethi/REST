@@ -34,7 +34,6 @@ public class UserServiceImp implements UserService{
       user.setRoles(user.getRoles().stream()
               .map(role -> roleService.findByRole(role.getRole()))
               .collect(Collectors.toSet()));
-
       user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
    }

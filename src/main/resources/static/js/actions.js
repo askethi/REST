@@ -17,26 +17,26 @@ async function sendDataEditUser(user) {
         {method:"PUT", headers: {'Content-type': 'application/json'}, body: JSON.stringify(user)} )
 }
 
-async function deleteUserData(userId){
+async function deleteUser(userId){
     await fetch(`/api/users/${userId}`, {method: 'DELETE'});
 }
 
 const modalEdit = document.getElementById("editModal");
 const modalDelete = document.getElementById("deleteModal");
 
-async function EditModalHandler() {
+async function editModalHandler() {
     await fillModal(modalEdit);
 }
 
-async function DeleteModalHandler() {
+async function deleteModalHandler() {
     await fillModal(modalDelete);
 }
 
 modalDelete.addEventListener("submit", async function(event) {
         event.preventDefault();
         const userId = event.target.querySelector("#idDelete").value;
-        await deleteUserData(userId);
-        await fillTableOfAllUsers();
+        await deleteUser(userId);
+        await fillAllUsers();
         const modalBootstrap = bootstrap.Modal.getInstance(modalDelete);
         modalBootstrap.hide();
     }
@@ -44,7 +44,6 @@ modalDelete.addEventListener("submit", async function(event) {
 
 modalEdit.addEventListener("submit", async function(event){
     event.preventDefault();
-
     let user = {
         id: document.getElementById("idEdit").value,
         firstName: document.getElementById("firstNameEdit").value,
@@ -56,23 +55,20 @@ modalEdit.addEventListener("submit", async function(event){
         roles: getRoles(document.getElementById("rolesEdit"))
     }
     await sendDataEditUser(user);
-    await fillTableOfAllUsers();
+    await fillAllUsers();
     const modalBootstrap = bootstrap.Modal.getInstance(modalEdit);
     modalBootstrap.hide();
 })
 
-async function addNewUserForm() {
+async function newUserForm() {
     const newUserForm = document.getElementById("newUser");
-
     newUserForm.addEventListener('submit', async function (event) {
         event.preventDefault();
-
         const firstName = newUserForm.querySelector("#firstName").value.trim();
         const lastName = newUserForm.querySelector("#lastName").value.trim();
         const password = newUserForm.querySelector("#password").value.trim();
         const email = newUserForm.querySelector("#email").value.trim();
         const age = newUserForm.querySelector("#age").value.trim();
-
         const newUserData = {
             firstName: firstName,
             lastName: lastName,
@@ -84,6 +80,6 @@ async function addNewUserForm() {
         await createNewUser(newUserData);
         newUserForm.reset();
         document.querySelector('a#show-users-table').click();
-        await fillTableOfAllUsers();
+        await fillAllUsers();
     });
 }
