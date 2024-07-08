@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class UserServiceImp implements UserService{
 
-
    private final UserRepository userRepository;
    private final PasswordEncoder passwordEncoder;
    private final RoleService roleService;
@@ -42,7 +41,6 @@ public class UserServiceImp implements UserService{
    @Override
    public void deleteUserById(int id) { userRepository.deleteById(id); }
 
-
    @Override
    public List<User> listUsers() {
       return userRepository.findAll();
@@ -54,14 +52,6 @@ public class UserServiceImp implements UserService{
       user.setRoles(user.getRoles().stream()
               .map(role -> roleService.findByRole(role.getRole()))
               .collect(Collectors.toSet()));
-      user.setPassword(passwordEncoder.encode(user.getPassword()));
-      userRepository.save(user);
-   }
-
-   @Transactional
-   @Override
-   public void updateUserById(User user, int id) {
-      user.setId(id);
       user.setPassword(passwordEncoder.encode(user.getPassword()));
       userRepository.save(user);
    }

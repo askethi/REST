@@ -40,7 +40,6 @@ async function authorize() {
 
 async function navbarEmail() {
     const currentUser = await getCurrentUser();
-    console.log("cu", currentUser);
     document.getElementById("currentUserEmailNavbar").innerHTML =
         `<strong>${currentUser.username}</strong>
                  with roles: 
